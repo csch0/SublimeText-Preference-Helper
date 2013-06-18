@@ -16,7 +16,7 @@ class PreferenceHelperListener(sublime_plugin.EventListener):
 		package_name = PackageName(view)
 		if package_name != "Default" and settings.get("protect_default_settings", True) and not IsUserSublimeSetting(view):
 			exclude_packages = settings.get("exclude_packages", [])
-			view.set_read_only(package_name in exclude_packages)
+			view.set_read_only(package_name not in exclude_packages)
 
 	def on_query_completions(self, view, prefix, locations):
 			
