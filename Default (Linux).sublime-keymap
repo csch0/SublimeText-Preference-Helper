@@ -4,7 +4,7 @@
 		"command": "open_setting_file"
 	},
 	{ 
-		"keys": ["ctrl+alt+up"],
+		"keys": ["alt+o"],
 		"command": "toggle_setting_file",
 		"context": 
 		[
