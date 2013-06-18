@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Preference Helper: Switch User/Default.sublime-settings",
+        "command": "switch_file"
+    }
+]

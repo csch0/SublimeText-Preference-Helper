@@ -1,0 +1,23 @@
+[
+	{ 
+		"keys": ["ctrl+shift+o"],
+		"command": "open_setting_file"
+	},
+	{ 
+		"keys": ["ctrl+alt+up"],
+		"command": "toggle_setting_file",
+		"context": 
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.json" }
+		]
+	},
+	{
+		"keys": ["ctrl+shift+;"],
+		"command": "fill_setting_file",
+		"context": 
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.json" },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\"[^\"]+\"\\s?$", "match_all": true }
+		]
+	}
+]
