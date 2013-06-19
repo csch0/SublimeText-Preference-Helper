@@ -10,7 +10,7 @@ else:
 class PreferenceHelperListener(sublime_plugin.EventListener):
 
 	def on_load(self, view):
-		if not IsSublimeSetting(view):
+		if not view or not IsSublimeSetting(view):
 			return []
 		settings = sublime.load_settings("Preference Helper.sublime-settings")
 		package_name = PackageName(view)
@@ -20,7 +20,7 @@ class PreferenceHelperListener(sublime_plugin.EventListener):
 
 	def on_query_completions(self, view, prefix, locations):
 			
-		if not IsUserSublimeSetting(view) or view.score_selector(locations[0], "source.json string.quoted.double.json") != 2064:
+		if not (view.score_selector(locations[0], "source.json")) or view.score_selector(locations[0], "source.json string.quoted.double.json") != 2064 or not IsSublimeSetting(view):
 			return []
 		src_json = DefaultSublimeSetting(view)
 		# print(src_json)
