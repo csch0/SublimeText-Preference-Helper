@@ -41,7 +41,7 @@ def IsUserSublimeSetting(view):
 	return os.path.dirname(view.file_name()).endswith("User")
 
 def PackageName(view):
-	return FindResources(os.path.basename(view.file_name()))[0].split(os.sep)[1]
+	return FindResources(os.path.basename(view.file_name()))[0].split("/")[1]
 
 def DefaultSublimeSetting(view):
 	file_dir, file_name = os.path.split(view.file_name())
