@@ -20,7 +20,7 @@ class PreferenceHelperListener(sublime_plugin.EventListener):
 
 	def on_query_completions(self, view, prefix, locations):
 			
-		if not (view.score_selector(locations[0], "source.json")) or view.score_selector(locations[0], "source.json string.quoted.double.json") != 2064 or not IsSublimeSetting(view):
+		if not view or not IsSublimeSetting(view) or not view.score_selector(locations[0], "source.json") or view.score_selector(locations[0], "source.json string.quoted.double.json") != 2064:
 			return []
 		src_json = DefaultSublimeSetting(view)
 		# print(src_json)
