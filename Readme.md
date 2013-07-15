@@ -19,19 +19,19 @@ Usage
 
 Installation
 ------------
-### Not using Package Control:
-* Save files to the `Packages/Preference Helper` directory, then relaunch Sublime:
-  * Linux: `~/.config/sublime-text-2/Packages/Preference Helper`
-  * Mac: `~/Library/Application Support/Sublime Text 2/Packages/Preference Helper`
-  * Windows: `%APPDATA%/Sublime Text 2/Packages/Preference Helper`
 
 ### Using Package Control:
-
-**Wait for the repository to be included. Custom repository:** `https://github.com/Chris---/SublimeText-Preference-Helper.git`
 
 * Bring up the Command Palette (Command+Shift+P on OS X, Control+Shift+P on Linux/Windows).
 * Select Package Control: Install Package.
 * Select Preference Helper to install.
+
+### Not using Package Control:
+
+* Save files to the `Packages/Preference Helper` directory, then relaunch Sublime:
+  * Linux: `~/.config/sublime-text-2|3/Packages/Preference Helper`
+  * Mac: `~/Library/Application Support/Sublime Text 2|3/Packages/Preference Helper`
+  * Windows: `%APPDATA%/Sublime Text 2|3/Packages/Preference Helper`
 
 If you would like to donate, here the option.
 
