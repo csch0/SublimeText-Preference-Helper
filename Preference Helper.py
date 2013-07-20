@@ -32,7 +32,7 @@ class PreferenceHelperListener(sublime_plugin.EventListener):
 		return keys, sublime.INHIBIT_WORD_COMPLETIONS | sublime.INHIBIT_EXPLICIT_COMPLETIONS
 
 
-class FillSettingFileCommand(sublime_plugin.TextCommand):
+class PrefFillSettingFileCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
 		
@@ -54,7 +54,7 @@ class FillSettingFileCommand(sublime_plugin.TextCommand):
 				self.view.show(point + len(s))
 
 
-class OpenSettingFileCommand(sublime_plugin.WindowCommand):
+class PrefOpenSettingFileCommand(sublime_plugin.WindowCommand):
 
 	def run(self):
 		
@@ -66,7 +66,7 @@ class OpenSettingFileCommand(sublime_plugin.WindowCommand):
 		self.window.show_quick_panel(resources, on_done)
 
 
-class ToggleSettingFileCommand(sublime_plugin.TextCommand):
+class PrefToggleSettingFileCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
 		return IsSublimeSetting(self.view)
