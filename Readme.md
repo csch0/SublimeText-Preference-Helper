@@ -10,7 +10,7 @@ Usage
 
 ![](http://www.latexing.com/wp-content/uploads/github/Preference%20Helper/OpenSettingFile.jpg)
 
-* `super+shift+up` on OSX or `alt+o` on Windows/Linux toggles between the user and default sublime-settings file
+* `super+alt+up` on OSX or `alt+o` on Windows/Linux toggles between the user and default sublime-settings file
 
 * `super+shift+;` on OSX or `ctrl+shift+;` on Windows/Linux completes the value of the current key with the initial value of the default sublime-setting.
 
