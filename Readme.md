@@ -8,13 +8,13 @@ Usage
 
 * `super+shift+o` on OSX or `ctrl+shift+o` on Windows/Linux shows a quick panel with all available sublime-settings files, you can filter and open one from here.
 
-![](http://www.latexing.com/wp-content/uploads/github/Preference%20Helper/OpenSettingFile.jpg)
+![](http://github.latexing.com/preference_helper_1.jpg)
 
 * `super+alt+up` on OSX or `alt+o` on Windows/Linux toggles between the user and default sublime-settings file
 
 * `super+shift+;` on OSX or `ctrl+shift+;` on Windows/Linux completes the value of the current key with the initial value of the default sublime-setting.
 
-![](http://www.latexing.com/wp-content/uploads/github/Preference%20Helper/CompleteSettingFile.gif)
+![](http://github.latexing.com/preference_helper_2.gif)
 
 
 Installation
