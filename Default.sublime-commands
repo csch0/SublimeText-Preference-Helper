@@ -2,5 +2,9 @@
     {
         "caption": "Preference Helper: Switch User/Default.sublime-settings",
         "command": "pref_toggle_setting_file"
+    },
+    {
+        "caption": "Preference Helper: Open *.sublime-setting",
+        "command": "pref_open_setting_file"
     }
 ]
