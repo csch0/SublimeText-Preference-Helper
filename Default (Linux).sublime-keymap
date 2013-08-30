@@ -4,6 +4,10 @@
 		"command": "pref_open_setting_file"
 	},
 	{ 
+		"keys": ["ctrl+shift+,"],
+		"command": "pref_open_setting_file"
+	},
+	{ 
 		"keys": ["alt+o"],
 		"command": "pref_toggle_setting_file",
 		"context": 

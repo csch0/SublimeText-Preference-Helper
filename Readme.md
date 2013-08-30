@@ -6,7 +6,7 @@ A simple plugin to help to editing Sublime 2/3 sublime-settings files; you can t
 Usage
 -----
 
-* `super+shift+o` on OSX or `ctrl+shift+o` on Windows/Linux shows a quick panel with all available sublime-settings files, you can filter and open one from here.
+* `super+shift+,` on OSX or `ctrl+shift+,` on Windows/Linux shows a quick panel with all available sublime-settings files, you can filter and open one from here.
 
 ![](http://github.latexing.com/preference_helper_1.jpg)
 
@@ -15,7 +15,6 @@ Usage
 * `super+shift+;` on OSX or `ctrl+shift+;` on Windows/Linux completes the value of the current key with the initial value of the default sublime-setting.
 
 ![](http://github.latexing.com/preference_helper_2.gif)
-
 
 Installation
 ------------
