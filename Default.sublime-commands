@@ -1,10 +1,18 @@
 [
-    {
-        "caption": "Preference Helper: Switch User/Default.sublime-settings",
-        "command": "pref_toggle_setting_file"
-    },
-    {
-        "caption": "Preference Helper: Open *.sublime-setting",
-        "command": "pref_open_setting_file"
-    }
+	{
+		"caption": "Preference Helper: Switch User/Default.sublime-settings",
+		"command": "pref_toggle_setting_file"
+	},
+	{
+		"caption": "Preference Helper: Open *.sublime-settings",
+		"command": "pref_open_setting_file",
+	},
+	{
+		"caption": "Preference Helper: Disable Read-only for Package",
+		"command": "pref_exclude_package"
+	},
+	{
+		"caption": "Preference Helper: Disable Read-only for Package (Temporary)",
+		"command": "pref_exclude_package", "args": {"save_to_settings": false}
+	}
 ]
