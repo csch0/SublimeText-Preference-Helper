@@ -1,6 +1,6 @@
 import sublime, sublime_plugin
 
-import fnmatch, os.path, re, json
+import fnmatch, os, re, json
 
 def FindResources(pattern):
 	# print("FindResources %s" % pattern)
@@ -41,14 +41,14 @@ def IsUserSublimeSetting(view):
 	return os.path.dirname(view.file_name()).endswith("User")
 
 def PackageName(view):
-	return FindResources(os.path.basename(view.file_name()))[0].split("/")[1]
+	return os.path.relpath(view.file_name(), sublime.packages_path()).split(os.sep, 1)[0]
 
 def DefaultSublimeSetting(view):
 	file_dir, file_name = os.path.split(view.file_name())
 	try:
 		package_name = PackageName(view)
 		content = LoadResource("Packages/%s/%s" % (package_name, file_name))
-		return DecodeValue(content)		
+		return DecodeValue(content)
 	except:
 		return {}
 

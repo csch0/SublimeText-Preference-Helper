@@ -5,7 +5,7 @@
 	},
 	{
 		"caption": "Preference Helper: Open *.sublime-settings",
-		"command": "pref_open_setting_file",
+		"command": "pref_open_setting_file"
 	},
 	{
 		"caption": "Preference Helper: Disable Read-only for Package",

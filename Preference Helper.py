@@ -3,9 +3,9 @@ import sublime, sublime_plugin
 import json, os.path, re
 
 try:
-	from .Tools import *
+	from .preference_helper.tools import *
 except ValueError:
-	from Tools import *
+	from preference_helper.tools import *
 
 class PreferenceHelperListener(sublime_plugin.EventListener):
 
