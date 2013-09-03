@@ -32,6 +32,12 @@ Installation
   * Mac: `~/Library/Application Support/Sublime Text 2|3/Packages/Preference Helper`
   * Windows: `%APPDATA%/Sublime Text 2|3/Packages/Preference Helper`
 
-If you would like to donate, here the option.
 
-[![Donate](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=65YK6LCJD7TK6)
+## Donating
+
+Support this project and [others by chris][gittip] via [gittip][].
+
+[![Support via Gittip][gittip-badge]][gittip]
+
+[gittip-badge]: https://raw.github.com/twolfson/gittip-badge/master/dist/gittip.png
+[gittip]: https://www.gittip.com/Chris---/
