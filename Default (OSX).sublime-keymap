@@ -1,16 +1,12 @@
 [
-	{ 
-		"keys": ["super+shift+o"],
-		"command": "pref_open_setting_file"
-	},
-	{ 
+	{
 		"keys": ["super+shift+,"],
 		"command": "pref_open_setting_file"
 	},
-	{ 
+	{
 		"keys": ["super+alt+up"],
 		"command": "pref_toggle_setting_file",
-		"context": 
+		"context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "source.json" }
 		]
@@ -18,7 +14,7 @@
 	{
 		"keys": ["super+shift+;"],
 		"command": "pref_fill_setting_file",
-		"context": 
+		"context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "source.json" },
 			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\"[^\"]+\"\\s?$", "match_all": true }

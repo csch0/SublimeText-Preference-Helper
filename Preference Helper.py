@@ -2,11 +2,10 @@ import sublime, sublime_plugin
 
 import json, os.path, re
 
-if int(sublime.version()) < 3000:
-	from Tools import *
-else:
+try:
 	from .Tools import *
-
+except ValueError:
+	from Tools import *
 
 class PreferenceHelperListener(sublime_plugin.EventListener):
 
