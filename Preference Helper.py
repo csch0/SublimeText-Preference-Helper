@@ -11,20 +11,20 @@ class PreferenceHelperListener(sublime_plugin.EventListener):
 
 	def on_activated(self, view):
 
-		if IsSublimeSetting(view):
+		if is_sublime_settings(view):
 			settings = sublime.load_settings("Preference Helper.sublime-settings")
-			package_name = PackageName(view)
-			if package_name != "Default" and settings.get("protect_default_settings", True) and not IsUserSublimeSetting(view) and not view.settings().get("pref_exclude_package"):
+			package_name = find_package_name(view)
+			if package_name != "Default" and settings.get("protect_default_settings", True) and not is_user_sublime_setting(view) and not view.settings().get("pref_exclude_package"):
 				exclude_packages = settings.get("exclude_packages", [])
 				view.set_read_only(package_name not in exclude_packages)
 
 	def on_query_completions(self, view, prefix, locations):
 
-		if not IsSublimeSetting(view) or view.score_selector(locations[0], "source.json string.quoted.double.json") != 2064:
+		if not is_sublime_settings(view) or view.score_selector(locations[0], "source.json string.quoted.double.json") != 2064:
 			return []
-		src_json = DefaultSublimeSetting(view)
+		src_json = default_sublime_setting(view)
 		# print(src_json)
-		dst_json = UserSublimeSetting(view)
+		dst_json = user_sublime_setting(view)
 		# print(dst_json)
 		keys = [(key, key) for key in src_json.keys() if "\"%s\"" % key not in dst_json]
 		# print(keys)
@@ -41,11 +41,11 @@ class PrefFillSettingFileCommand(sublime_plugin.TextCommand):
 		expr = re.search(r"\"(?P<key>[^\"]+)\"", line)
 		if expr:
 			key = expr.group("key")[::-1]
-			src_json = DefaultSublimeSetting(self.view)
+			src_json = default_sublime_setting(self.view)
 			if key in src_json:
 				s = json.dumps({key:src_json[key]}, indent=2).strip("{}").strip("\t\n ")
 				s = s.replace("\"%s\"" % key, "")
-				s = "%s" % re.sub(r"\n\s{%d}" % 2, "\n%s" % Indention(line[::-1]), s)
+				s = "%s" % re.sub(r"\n\s{%d}" % 2, "\n%s" % indention(line[::-1]), s)
 				# Insert default value
 				self.view.insert(edit, point, s)
 				self.view.sel().clear()
@@ -57,7 +57,7 @@ class PrefOpenSettingFileCommand(sublime_plugin.WindowCommand):
 
 	def run(self):
 
-		resources = [resource[9:] for resource in FindResources("*.sublime-settings")]
+		resources = [resource[9:] for resource in find_resources("*.sublime-settings")]
 		def on_done(i):
 			if i >= 0:
 				self.window.run_command("open_file", { "file": "${packages}/%s" % resources[i]})
@@ -68,15 +68,22 @@ class PrefOpenSettingFileCommand(sublime_plugin.WindowCommand):
 class PrefToggleSettingFileCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
-		return IsSublimeSetting(self.view)
+		return is_sublime_settings(self.view)
 
 	def run(self, edit):
 
 		file_dir, file_name = os.path.split(self.view.file_name())
 
-		if IsUserSublimeSetting(self.view):
-			package_name = PackageName(self.view)
-			self.view.window().run_command("open_file", { "file": "${packages}/%s/%s" % (package_name, file_name) })
+		if is_user_sublime_setting(self.view):
+			package_name = find_package_name(self.view)
+			def on_done(i):
+				if i >= 0:
+					self.view.window().run_command("open_file", { "file": "${packages}/%s/%s" % (package_name[i], file_name) })
+			# Show a list if more than one possible source
+			if isinstance(package_name, list):
+				self.view.window().show_quick_panel(["%s/%s" % (item, file_name) for item in package_name], on_done)
+			else:
+				self.view.window().run_command("open_file", { "file": "${packages}/%s/%s" % (package_name, file_name) })
 		else:
 			self.view.window().run_command("open_file", { "file": "${packages}/User/%s" % file_name })
 
@@ -84,12 +91,12 @@ class PrefToggleSettingFileCommand(sublime_plugin.TextCommand):
 class PrefExcludePackageCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
-		return IsSublimeSetting(self.view) and not IsUserSublimeSetting(self.view)
+		return is_sublime_settings(self.view) and not is_user_sublime_setting(self.view)
 
 	def run(self, edit, save_to_settings = True):
 
 		# Get package name
-		package_name = PackageName(self.view)
+		package_name = find_package_name(self.view)
 
 		if save_to_settings:
 			# Load settings if save_to_settings

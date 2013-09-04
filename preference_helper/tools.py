@@ -2,8 +2,8 @@ import sublime, sublime_plugin
 
 import fnmatch, os, re, json
 
-def FindResources(pattern):
-	# print("FindResources %s" % pattern)
+def find_resources(pattern):
+	# print("find_resources %s" % pattern)
 	resources = []
 	if hasattr(sublime, 'find_resources'):
 		resources = sublime.find_resources(pattern)
@@ -15,51 +15,53 @@ def FindResources(pattern):
 					resources += [os.path.join('Packages', rel_path)]
 	return resources
 
-def LoadResource(name):
-	# print("LoadResource %s" % name)
+def load_resource(name):
+	# print("load_resource %s" % name)
 	if hasattr(sublime, 'load_resource'):
 		return sublime.load_resource(name)
 	else:
 		with open(os.path.join(sublime.packages_path(), name[9:])) as f:
 			return f.read()
 
-def DecodeValue(string):
-	# print("DecodeValue")
+def decode_value(string):
+	# print("decode_value")
 	if hasattr(sublime, 'decode_value'):
 		return sublime.decode_value(string)
 	else:
 		lines = [line for line in string.split("\n") if not re.search(r'//.*', line)]
 		return json.loads("\n".join(lines))
 
-def IsSublimeSetting(view):
+def is_sublime_settings(view):
 	try:
 		return view.match_selector(0, "source.json") and view.file_name().endswith(".sublime-settings")
 	except:
 		return False
 
-def IsUserSublimeSetting(view):
-	return os.path.dirname(view.file_name()).endswith("User")
+def is_user_sublime_setting(view):
+	return os.path.dirname(view.file_name())[-5:] == os.sep + "User"
 
-def PackageName(view):
-	return os.path.relpath(view.file_name(), sublime.packages_path()).split(os.sep, 1)[0]
+def find_package_name(view):
+	file_dir, file_name = os.path.split(view.file_name())
+	package_names = [os.path.dirname(item[9:]) for item in find_resources(file_name) if item[9:13] != "User"]
+	return package_names[0] if len(package_names) == 1 else package_names
 
-def DefaultSublimeSetting(view):
+def default_sublime_setting(view):
 	file_dir, file_name = os.path.split(view.file_name())
 	try:
-		package_name = PackageName(view)
-		content = LoadResource("Packages/%s/%s" % (package_name, file_name))
-		return DecodeValue(content)
+		package_name = find_package_name(view)
+		content = load_resource("Packages/%s/%s" % (package_name, file_name))
+		return decode_value(content)
 	except:
 		return {}
 
-def UserSublimeSetting(view):
+def user_sublime_setting(view):
 	file_dir, file_name = os.path.split(view.file_name())
 	try:
-		return LoadResource("Packages/User/%s" % file_name)
+		return load_resource("Packages/User/%s" % file_name)
 	except:
 		return []
 
-def Indention(s):
+def indention(s):
 	rex = re.compile(r"[\t\s]*(?=[^\t\s])")
 	expr = rex.search(s)
 	return expr.group() if expr else ""
