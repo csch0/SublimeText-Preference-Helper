@@ -9,14 +9,18 @@ except ValueError:
 
 class PreferenceHelperListener(sublime_plugin.EventListener):
 
-	def on_activated(self, view):
-
+	def is_read_only(self, view):
 		if is_sublime_settings(view):
 			settings = sublime.load_settings("Preference Helper.sublime-settings")
 			package_name = find_package_name(view)
 			if package_name != "Default" and settings.get("protect_default_settings", True) and not is_user_sublime_setting(view) and not view.settings().get("pref_exclude_package"):
 				exclude_packages = settings.get("exclude_packages", [])
-				view.set_read_only(package_name not in exclude_packages)
+				return package_name not in exclude_packages
+		return False
+
+	def on_activated(self, view):
+		if view.size():
+			view.set_read_only(self.is_read_only(view))		
 
 	def on_query_completions(self, view, prefix, locations):
 
